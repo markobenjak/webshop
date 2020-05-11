@@ -9,7 +9,7 @@ public interface OrderDao {
 	void createOrder(Order order);
 	List<Order> readOrder(Order order);
 
-	void deleteOrder(Order order);
+	void deleteOrder(int orderId);
 
 	void finalizeOrder(Order order);
 }

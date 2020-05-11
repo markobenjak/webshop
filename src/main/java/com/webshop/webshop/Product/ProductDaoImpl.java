@@ -29,11 +29,11 @@ public class ProductDaoImpl implements ProductDao {
 	}
 	
 	@Override
-	public String validateProduct(Product product) {
+	public String validateProduct(int productId) {
 		
 		final String productSql = "select * from shop.product where id = :id";
 		SqlParameterSource productParam = new MapSqlParameterSource()
-				.addValue("id", product.getId());
+				.addValue("id", productId);
 		
 		ProductRowMapper productMaper = new ProductRowMapper();
 		List<Product> itemList = template.query(productSql, productParam ,productMaper);

@@ -4,11 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.webshop.webshop.Order.Order;
 
@@ -19,15 +15,15 @@ public class ProductController {
 	@Resource 
 	ProductDaoImpl productService;
 
-	@GetMapping(value = "/productList")
+	@GetMapping(value = "/product/list")
 	public List<Product> getProducts() {
 		return productService.findAll();
 
 	}
 	
-	@PostMapping(value = "/validateProduct")
-	public String validate(@RequestBody Product product) {
-		return productService.validateProduct(product);
+	@GetMapping(value = "/product/validate/id")
+	public String validate(@RequestParam("id") int productId) {
+		return productService.validateProduct(productId);
 
 	}
 }

@@ -4,11 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.webshop.webshop.Order.Order;
 
@@ -19,13 +15,13 @@ public class OrderItemController {
 	@Resource 
 	OrderItemDaoImpl orderItemService;
 
-	@GetMapping(value = "/orderItemList")
+	@GetMapping(value = "/orderItem/list")
 	public List<OrderItem> getOrderItemList() {
 		return orderItemService.findAll();
 
 	}
 	
-	@PostMapping(value = "/updateOrder")
+	@PutMapping(value = "/orderItem")
 	public void createOrder(@RequestBody OrderItem orderItem) {
 		orderItemService.updateOrder(orderItem);
 	}

@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.catalina.connector.Response;
 import org.json.JSONObject;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCallback;
@@ -80,15 +79,15 @@ public class OrderDaoImpl implements OrderDao {
 	}
 	
 	@Override
-	public void deleteOrder(Order order) {
+	public void deleteOrder(int orderId) {
 		 final String sql = "delete from shop.webshop_order where id=:id";
 		 
-		 Map<String,Object> map=new HashMap<String,Object>();  
-		 map.put("id", order.getId());
+		 Map<String,Integer> map=new HashMap<String,Integer>();
+		 map.put("id", orderId);
 		 
-		 template.execute(sql,map,new PreparedStatementCallback<Object>() {  	 
+		 template.execute(sql,map,new PreparedStatementCallback<Integer>() {
 			 @Override  
-			 public Object doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {  
+			 public Integer doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {
 				 return ps.executeUpdate();  
 				 }  
 		 });  

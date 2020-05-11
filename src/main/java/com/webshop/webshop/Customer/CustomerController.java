@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/webshop")
+@RequestMapping("/api/webshop")
 public class CustomerController {
 	
 	@Resource 
 	CustomerDaoImpl customerService;
 
-	@GetMapping(value = "/customerList")
+	@GetMapping(value = "/customer/all")
 	public List<Customer> getCustomer() {
 		return customerService.findAll();
 
 	}
 	
-	@PostMapping(value = "/createCustomer")
+	@PostMapping(value = "/customer")
 	public void createCustomer(@RequestBody Customer customer) {
 		customerService.createCustomer(customer);
 	}

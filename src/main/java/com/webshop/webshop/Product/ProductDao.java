@@ -6,5 +6,5 @@ public interface ProductDao {
 
 	List<Product> findAll();
 
-	String validateProduct(Product product);
+	String validateProduct(int productId);
 }
