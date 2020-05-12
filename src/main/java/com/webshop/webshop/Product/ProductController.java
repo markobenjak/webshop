@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.*;
 import com.webshop.webshop.Order.Order;
 
 @RestController
-@RequestMapping("/webshop")
+@RequestMapping("/api/product")
 public class ProductController {
 	
 	@Resource 
 	ProductDaoImpl productService;
 
-	@GetMapping(value = "/product/list")
+	@GetMapping(value = "/list")
 	public List<Product> getProducts() {
 		return productService.findAll();
 
 	}
-	
-	@GetMapping(value = "/product/validate/id")
+
+	//@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping(value = "/validate/id")
 	public String validate(@RequestParam("id") int productId) {
 		return productService.validateProduct(productId);
 

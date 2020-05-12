@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import com.webshop.webshop.Order.Order;
 
 @RestController
-@RequestMapping("/webshop")
+@RequestMapping("/api/orderItem")
 public class OrderItemController {
 	
 	@Resource 
 	OrderItemDaoImpl orderItemService;
 
-	@GetMapping(value = "/orderItem/list")
+	@GetMapping(value = "/list")
 	public List<OrderItem> getOrderItemList() {
 		return orderItemService.findAll();
 
 	}
 	
-	@PutMapping(value = "/orderItem")
+	@PutMapping(value = "/")
 	public void createOrder(@RequestBody OrderItem orderItem) {
 		orderItemService.updateOrder(orderItem);
 	}
