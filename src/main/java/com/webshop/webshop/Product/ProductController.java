@@ -15,15 +15,19 @@ public class ProductController {
 	@Resource 
 	ProductDaoImpl productService;
 
+	@GetMapping(value = "/{id}")
+	public Product getProduct(@PathVariable("id") int productId){
+		return productService.singleProduct(productId);
+	}
+
 	@GetMapping(value = "/list")
 	public List<Product> getProducts() {
 		return productService.findAll();
 
 	}
 
-	//@CrossOrigin(origins = "http://localhost:3000")
-	@GetMapping(value = "/validate/id")
-	public String validate(@RequestParam("id") int productId) {
+	@GetMapping(value = "/validate/{id}")
+	public String validate(@PathVariable("id") int productId) {
 		return productService.validateProduct(productId);
 
 	}

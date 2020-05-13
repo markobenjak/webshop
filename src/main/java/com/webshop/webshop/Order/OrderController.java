@@ -30,8 +30,8 @@ public class OrderController {
 
 	}
 	
-	@DeleteMapping(value = "/delete/id")
-	public void deleteOrder(@RequestParam("id") Integer orderId) {
+	@DeleteMapping(value = "/delete/{id}")
+	public void deleteOrder(@PathVariable("id") Integer orderId) {
 		orderService.deleteOrder(orderId);
 	}
 	

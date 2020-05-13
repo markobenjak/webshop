@@ -7,15 +7,18 @@ import 'antd/dist/antd.css';
 
 import '../App.css';
 
+import logo from '../assets/logo-2.svg';
 
 
-
-export default function Header(props){
-    return(
+export default function Header(props) {
+    return (
         <Layout.Header className="header-margin">
             <Row className="content-width" >
                 <Col md={4} xs={6}>
-                    <div className="logo" />
+                    <a href="/">
+                        <div className="logo" />
+                    </a>
+
                 </Col>
                 <Col md={{ span: 10, offset: 3 }} xs={16}>
                     <Input.Search
@@ -27,7 +30,10 @@ export default function Header(props){
                 <Col md={{ span: 1, offset: 4 }}>
                     <a href="#" >
                         <Badge count={2}>
-                            <Avatar icon={<ShoppingCartOutlined style={{ fontSize: "1.4em", verticalAlign: "middle" }} />} size={32} style={{ background: "none" }} />
+                            <Avatar
+                                icon={<ShoppingCartOutlined style={{ fontSize: "1.4em", verticalAlign: "middle" }} />}
+                                size={32}
+                                style={{ background: "none" }} />
                         </Badge>
                     </a>
                 </Col>

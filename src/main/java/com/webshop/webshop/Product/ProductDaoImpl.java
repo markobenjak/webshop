@@ -21,7 +21,21 @@ public class ProductDaoImpl implements ProductDao {
 
 	}  
 
-	NamedParameterJdbcTemplate template;  
+	NamedParameterJdbcTemplate template;
+
+	@Override
+	public Product singleProduct(int productId){
+
+		final String productSql = "select * from shop.product where id = :id limit 1";
+		SqlParameterSource productParam = new MapSqlParameterSource()
+				.addValue("id", productId);
+
+		ProductRowMapper productMaper = new ProductRowMapper();
+		List<Product> itemList = template.query(productSql, productParam ,productMaper);
+
+		if(itemList.size() > 0) return itemList.get(0);
+		return null;
+	}
 	
 	@Override
 	public List<Product> findAll() {
