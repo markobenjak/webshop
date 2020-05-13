@@ -9,4 +9,6 @@ public interface ProductDao {
 	List<Product> findAll();
 
 	String validateProduct(int productId);
+
+	List<Product> searchProduct(String searchString);
 }

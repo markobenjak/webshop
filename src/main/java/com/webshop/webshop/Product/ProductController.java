@@ -23,12 +23,15 @@ public class ProductController {
 	@GetMapping(value = "/list")
 	public List<Product> getProducts() {
 		return productService.findAll();
-
 	}
 
 	@GetMapping(value = "/validate/{id}")
 	public String validate(@PathVariable("id") int productId) {
 		return productService.validateProduct(productId);
+	}
 
+	@GetMapping(value = "/search/{searchString}")
+	public List<Product> searchProducts(@PathVariable("searchString") String searchString) {
+		return productService.searchProduct(searchString);
 	}
 }

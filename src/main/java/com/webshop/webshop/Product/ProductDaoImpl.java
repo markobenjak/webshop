@@ -59,5 +59,15 @@ public class ProductDaoImpl implements ProductDao {
 		}
 	}
 
+	@Override
+	public List<Product> searchProduct(String searchString) {
 
+		final String productSql = "select * from shop.product where upper(name||' '||description) like upper('%'||:searchString||'%')";
+
+		SqlParameterSource productParam = new MapSqlParameterSource()
+				.addValue("searchString", searchString);
+
+		ProductRowMapper productMaper = new ProductRowMapper();
+		return template.query(productSql, productParam ,productMaper);
+	}
 }
