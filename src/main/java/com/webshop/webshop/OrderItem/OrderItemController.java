@@ -29,7 +29,7 @@ public class OrderItemController {
 		orderItemService.updateOrder(orderItem);
 	}
 	
-	@DeleteMapping(value = "/deleteOrdeItemById")
+	@DeleteMapping(value = "/deleteOrderItemById")
 	public void deleteOrderItem(@RequestBody OrderItem orderItem) {
 		orderItemService.deleteOrderItem(orderItem);	
 	}
