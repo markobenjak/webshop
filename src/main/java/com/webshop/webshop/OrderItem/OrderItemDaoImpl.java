@@ -1,7 +1,13 @@
 package com.webshop.webshop.OrderItem;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -9,8 +15,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 
-import com.webshop.webshop.Order.Order;
-import com.webshop.webshop.Order.OrderRowMapper;
 import com.webshop.webshop.Product.Product;
 import com.webshop.webshop.Product.ProductRowMapper;
 
@@ -53,5 +57,22 @@ public class OrderItemDaoImpl implements OrderItemDao {
 				 template.update(sql,param, holder);
 			 }
 		 }
+	}
+
+
+	public void deleteOrderItem(OrderItem orderItem) {
+		
+		final String sql = "delete from shop.order_item where id=:id";
+		 
+		 Map<String,Object> map=new HashMap<String,Object>();  
+		 map.put("id", orderItem.getId());
+		 
+		 template.execute(sql,map,new PreparedStatementCallback<Object>() {  	 
+			 @Override  
+			 public Object doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {  
+				 return ps.executeUpdate();  
+				 }  
+		 }); 
+		
 	}
 }

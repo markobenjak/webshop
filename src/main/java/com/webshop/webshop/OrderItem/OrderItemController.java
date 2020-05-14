@@ -4,12 +4,15 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.web.bind.annotation.*;
-
-import com.webshop.webshop.Order.Order;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/orderItem")
+@RequestMapping("/webshop")
 public class OrderItemController {
 	
 	@Resource 
@@ -24,6 +27,11 @@ public class OrderItemController {
 	@PostMapping(value = "/")
 	public void createOrder(@RequestBody OrderItem orderItem) {
 		orderItemService.updateOrder(orderItem);
+	}
+	
+	@DeleteMapping(value = "/deleteOrdeItemById")
+	public void deleteOrderItem(@RequestBody OrderItem orderItem) {
+		orderItemService.deleteOrderItem(orderItem);	
 	}
 	
 	

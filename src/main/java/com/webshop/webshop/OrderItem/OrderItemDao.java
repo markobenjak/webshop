@@ -8,4 +8,5 @@ public interface OrderItemDao {
 
 	void updateOrder(OrderItem orderItem);
 
+	void deleteOrderItem(OrderItem orderItem);
 }
