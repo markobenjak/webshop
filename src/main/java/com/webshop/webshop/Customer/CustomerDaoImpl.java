@@ -1,9 +1,15 @@
 package com.webshop.webshop.Customer;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.webshop.webshop.Product.Product;
 import com.webshop.webshop.Product.ProductRowMapper;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -23,7 +29,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	NamedParameterJdbcTemplate template;
 
 	@Override
-	public Customer findCustomerById(int customerId){
+	public Customer FindCustomerById(int customerId){
 		final String customerSql = "select * from shop.customer where id = :id limit 1";
 		SqlParameterSource customerParam = new MapSqlParameterSource()
 				.addValue("id", customerId);
@@ -36,12 +42,12 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 	
 	@Override
-	public List<Customer> findAll() {
+	public List<Customer> FindAll() {
 		return template.query("select * from shop.customer", new CustomerRowMapper());		
 	}
 
 	@Override
-	public void createCustomer(Customer customer) {
+	public Customer CreateCustomer(Customer customer) {
 		
 		final String sql = "insert into shop.customer (first_name, last_name, email) "
 				+ " values(:first_name, :last_name, :email) returning id;";
@@ -53,7 +59,39 @@ public class CustomerDaoImpl implements CustomerDao {
 			.addValue("last_name", customer.getLast_name())
 			.addValue("email", customer.getEmail());
 		 template.update(sql,param, holder);
+
+		 customer.setId(holder.getKey().intValue());
+
+		 return customer;
 	}
-	
+
+	@Override
+	public void UpdateCustomer(Customer customer){
+		final String sql = "update shop.customer set first_name = :first_name, last_name = :last_name, email = :email where id = :id";
+
+		SqlParameterSource params = new MapSqlParameterSource()
+										.addValue("id", customer.getId())
+										.addValue("first_name", customer.getFirst_name())
+										.addValue("last_name", customer.getLast_name())
+										.addValue("email", customer.getEmail());
+		KeyHolder holder = new GeneratedKeyHolder();
+
+		template.update(sql, params, holder);
+	}
+
+	@Override
+	public void DeleteCustomer(int customerId){
+		final String sql = "delete from shop.customer where id=:id";
+
+		Map<String,Integer> map=new HashMap<String,Integer>();
+		map.put("id", customerId);
+
+		template.execute(sql,map,new PreparedStatementCallback<Integer>() {
+			@Override
+			public Integer doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {
+				return ps.executeUpdate();
+			}
+		});
+	}
 
 }

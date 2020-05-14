@@ -14,18 +14,28 @@ public class CustomerController {
 	CustomerDaoImpl customerService;
 
 	@GetMapping(value="/{id}")
-	public Customer getCustomer(@PathVariable("id") int customerId){
-		return customerService.findCustomerById(customerId);
+	public Customer GetCustomer(@PathVariable("id") int customerId){
+		return customerService.FindCustomerById(customerId);
 	}
 
 	@GetMapping(value = "/all")
-	public List<Customer> getCustomers() {
-		return customerService.findAll();
-
+	public List<Customer> GetAllCustomers() {
+		return customerService.FindAll();
 	}
-	
-	@PostMapping(value="/")
-	public void createCustomer(@RequestBody Customer customer) {
-		customerService.createCustomer(customer);
+
+
+	@PostMapping()
+	public Customer CreateCustomer(@RequestBody Customer customer) {
+		return customerService.CreateCustomer(customer);
+	}
+
+	@PutMapping(value="/{id}")
+	public void UpdateCustomer(@PathVariable("id") int customerId, @RequestBody Customer customer){
+		customerService.UpdateCustomer(customer);
+	}
+
+	@DeleteMapping(value="/{id}")
+	public void DeleteCustomer(@PathVariable("id") int customerId){
+		customerService.DeleteCustomer(customerId);
 	}
 }

@@ -4,10 +4,13 @@ import java.util.List;
 
 public interface CustomerDao {
 
-	Customer findCustomerById(int customerId);
+	Customer FindCustomerById(int customerId);
 
-	List<Customer> findAll();
+	List<Customer> FindAll();
 
-	void createCustomer(Customer customer);
+	Customer CreateCustomer(Customer customer);
 
+	void UpdateCustomer(Customer customer);
+
+	void DeleteCustomer(int customerId);
 }
