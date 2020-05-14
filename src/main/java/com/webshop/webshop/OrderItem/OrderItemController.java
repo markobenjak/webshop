@@ -21,7 +21,7 @@ public class OrderItemController {
 
 	}
 	
-	@PutMapping(value = "/")
+	@PostMapping(value = "/")
 	public void createOrder(@RequestBody OrderItem orderItem) {
 		orderItemService.updateOrder(orderItem);
 	}

@@ -10,18 +10,18 @@ export default function Products({products}) {
     return (
         <Row >
             {
-                products !== null ? products.map((item, index) => {
+                products && products.map((item, index) => {
                     return (
                         <Col xs={{ span: 24 }} md={{ span: 6 }} className="col-bottom-spacing">
                             <ProductCard
                                 title={item["name"]}
                                 price={item["price_hrk"]}
                                 id={item["id"]}
-                                key={item["id"]}
+                                key={index}
                             />
                         </Col>
                     )
-                }) : null
+                })
             }
         </Row>
     )
