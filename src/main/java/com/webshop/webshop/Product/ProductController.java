@@ -25,9 +25,24 @@ public class ProductController {
 		return productService.findAll();
 	}
 
+	@PostMapping(value = "/create/")
+	public void createProduct(@RequestBody Product product) {
+		productService.createProduct(product);
+	}
+
+	@PutMapping(value = "/update/")
+	public void updateProduct(@RequestBody Product product) {
+		productService.updateProduct(product);
+	}
+
 	@GetMapping(value = "/validate/{id}")
 	public String validate(@PathVariable("id") int productId) {
 		return productService.validateProduct(productId);
+	}
+
+	@DeleteMapping(value = "/delete/{id}")
+	public void deleteProduct(@PathVariable("id") Integer productId) {
+		productService.deleteProduct(productId);
 	}
 
 	@GetMapping(value = "/search/{searchString}")

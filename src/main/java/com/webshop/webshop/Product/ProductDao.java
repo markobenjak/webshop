@@ -8,7 +8,13 @@ public interface ProductDao {
 
 	List<Product> findAll();
 
+	void createProduct(Product product);
+
+	void updateProduct(Product product);
+
 	String validateProduct(int productId);
+
+	void deleteProduct(int productId);
 
 	List<Product> searchProduct(String searchString);
 }
