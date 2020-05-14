@@ -2,6 +2,8 @@ package com.webshop.webshop.Customer;
 
 import java.util.List;
 
+import com.webshop.webshop.Product.Product;
+import com.webshop.webshop.Product.ProductRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -18,7 +20,20 @@ public class CustomerDaoImpl implements CustomerDao {
         this.template = template;  
 	}  
 
-	NamedParameterJdbcTemplate template;  
+	NamedParameterJdbcTemplate template;
+
+	@Override
+	public Customer findCustomerById(int customerId){
+		final String customerSql = "select * from shop.customer where id = :id limit 1";
+		SqlParameterSource customerParam = new MapSqlParameterSource()
+				.addValue("id", customerId);
+
+		CustomerRowMapper customerMapper = new CustomerRowMapper();
+		List<Customer> itemList = template.query(customerSql, customerParam ,customerMapper);
+
+		if(itemList.size() > 0) return itemList.get(0);
+		return null;
+	}
 	
 	@Override
 	public List<Customer> findAll() {
