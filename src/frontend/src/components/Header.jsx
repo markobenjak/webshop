@@ -1,7 +1,8 @@
 import React from 'react';
-import { Layout, Menu, Input, Row, Col, Badge, Avatar, Card } from 'antd';
+import { useRecoilState, atom} from 'recoil';
+import { Layout,  Input, Row, Col, Badge, Avatar, Button } from 'antd';
 
-import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 
 import 'antd/dist/antd.css';
 
@@ -11,6 +12,20 @@ import logo from '../assets/logo-2.svg';
 
 
 export default function Header(props) {
+
+    const SearchButton = () => {
+        return(
+            <Button  icon={<SearchOutlined />}>
+                Search
+            </Button>
+        )
+    }
+
+    const search = value => {
+        console.log("Header render");
+        props.searchCallback(value);
+    }
+
     return (
         <Layout.Header className="header-margin">
             <Row className="content-width" >
@@ -25,7 +40,7 @@ export default function Header(props) {
                         placeholder="Search"
                         className="search-margin"
                         enterButton
-                        onSearch={value => console.log(value)} />
+                        onSearch={value => search(value)} />
                 </Col>
                 <Col md={{ span: 1, offset: 4 }}>
                     <a href="#" >

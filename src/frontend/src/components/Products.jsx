@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Layout, Row, Col, Button } from 'antd';
+import React  from 'react';
+import { Row, Col } from 'antd';
 
 import ProductCard from './ProductCard';
 
