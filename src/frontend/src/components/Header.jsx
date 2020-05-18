@@ -1,17 +1,22 @@
 import React from 'react';
-import { useRecoilState, atom} from 'recoil';
+import { LocalizationContext } from './LocalizationContext';
 import { Layout,  Input, Row, Col, Badge, Avatar, Button } from 'antd';
 
 import { ShoppingCartOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 
-import 'antd/dist/antd.css';
+import LanguageDropdown from './LanguageDropdown';
 
+import 'antd/dist/antd.css';
 import '../App.css';
+
+import translations from '../translations/translations.json';
 
 import logo from '../assets/logo-2.svg';
 
 
 export default function Header(props) {
+
+    const locale = React.useContext(LocalizationContext);
 
     const SearchButton = () => {
         return(
@@ -37,12 +42,16 @@ export default function Header(props) {
                 </Col>
                 <Col md={{ span: 10, offset: 3 }} xs={16}>
                     <Input.Search
-                        placeholder="Search"
+                        placeholder={translations.search[locale]}
                         className="search-margin"
                         enterButton
                         onSearch={value => search(value)} />
                 </Col>
-                <Col md={{ span: 1, offset: 4 }}>
+                <Col md={2}>
+                    {/* Shit's broken yo */}
+                    <LanguageDropdown />
+                </Col>
+                <Col md={{ span: 1, offset: 2 }}>
                     <a href="#" >
                         <Badge count={2}>
                             <Avatar

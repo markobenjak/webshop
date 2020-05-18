@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import { Layout, Row, Col, Select } from 'antd';
+
+import { LocalizationContext } from './LocalizationContext';
 
 import {
     Switch,
@@ -12,18 +13,22 @@ import ProductPage from './ProductPage';
 
 import 'antd/dist/antd.css';
 import '../App.css';
+import translations from '../translations/translations.json';
 
 const { Option } = Select;
 
 
 export default function Content(props) {
 
+
     const [searchQuery, setSearchQuery] = useState("");
     const [products, setProducts] = useState(null);
     const [productsPerPage, setProductsPerPage] = useState(10);
     const [isLoadingProducts, setIsLoadingProducts] = useState(false);
 
-    //console.log(props.search);
+    const locale = React.useContext(LocalizationContext);
+
+    //console.log(locale);
 
     const fetchItems = () =>{
         fetch('/api/product/list',{
@@ -70,7 +75,7 @@ export default function Content(props) {
             <Row>
                 <Col>
                     <p>
-                        Products per page:
+                        {translations.prodsParPage[locale]}
                         <Select defaultValue={productsPerPage} onSelect={value => setProductsPerPage(value)}>
                             <Option value={10}>10</Option>
                             <Option value={20}>20</Option>
@@ -79,7 +84,6 @@ export default function Content(props) {
                     </p>
                 </Col>
             </Row>
-            
         )
     }
 

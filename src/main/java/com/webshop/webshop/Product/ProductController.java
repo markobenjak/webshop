@@ -45,6 +45,7 @@ public class ProductController {
 		productService.deleteProduct(productId);
 	}
 
+	//GET: /api/product/search?product=nekiproizvod
 	@GetMapping(value = "/search")
 	public List<Product> searchProducts(@RequestParam("product") String searchString) {
 		return productService.searchProduct(searchString);

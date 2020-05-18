@@ -1,0 +1,14 @@
+{
+    "prodsParPage":{
+        "hr":"Broj proizvoda po stranici: ",
+        "en":"Products per page: "
+    },
+    "price":{
+        "hr":"Cijena",
+        "en":"Price"
+    },
+    "search":{
+        "hr":"Pretraga",
+        "en":"Search"
+    }
+}
