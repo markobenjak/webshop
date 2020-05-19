@@ -15,6 +15,8 @@ import 'antd/dist/antd.css';
 import '../App.css';
 import translations from '../translations/translations.json';
 
+import Basket from './Basket';
+
 const { Option } = Select;
 
 
@@ -26,7 +28,7 @@ export default function Content(props) {
     const [productsPerPage, setProductsPerPage] = useState(10);
     const [isLoadingProducts, setIsLoadingProducts] = useState(false);
 
-    const locale = React.useContext(LocalizationContext);
+    const { locale } = React.useContext(LocalizationContext);
 
     //console.log(locale);
 
@@ -97,6 +99,9 @@ export default function Content(props) {
                         <Products products={products} productCount={productsPerPage}/>
                     </Route>
                     <Route path="/product/:id" component={ProductPage} />
+                    <Route path="/basket" >
+                        <Basket />
+                    </Route>
                 </Switch>
             </div>
         </Layout.Content>

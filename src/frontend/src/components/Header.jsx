@@ -2,6 +2,8 @@ import React from 'react';
 import { LocalizationContext } from '../util/LocalizationContext';
 import { Layout,  Input, Row, Col, Badge, Avatar, Button } from 'antd';
 
+import {Link} from 'react-router-dom';
+
 import { ShoppingCartOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 
 import LanguageDropdown from './LanguageDropdown';
@@ -14,7 +16,7 @@ import translations from '../translations/translations.json';
 
 export default function Header(props) {
 
-    const locale = React.useContext(LocalizationContext);
+    const { locale } = React.useContext(LocalizationContext);
 
     const SearchButton = () => {
         return(
@@ -49,15 +51,15 @@ export default function Header(props) {
                     {/* Shit's broken yo */}
                     <LanguageDropdown />
                 </Col>
-                <Col md={{ span: 1, offset: 0 }}>
-                    <a href="#" >
+                <Col md={{ span: 1, offset: 1 }}>
+                    <Link to="/basket" >
                         <Badge count={2}>
                             <Avatar
                                 icon={<ShoppingCartOutlined style={{ fontSize: "1.4em", verticalAlign: "middle" }} />}
                                 size={32}
                                 style={{ background: "none" }} />
                         </Badge>
-                    </a>
+                    </Link>
                 </Col>
                 <Col span={1} offset={1} >
                     <a href="#" >

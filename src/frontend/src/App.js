@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Layout } from 'antd';
-import { LocalizationContext, Localization } from './util/LocalizationContext';
+import { LocalizationContext } from './util/LocalizationContext';
 
 import {
   BrowserRouter as Router,
@@ -12,17 +12,27 @@ import Content from './components/Content';
 import 'antd/dist/antd.css';
 import './App.css';
 
+const languages = ["hr","en"];
 
 function App() {
 
   const [ searchText, setSearchText] = useState("");
-
   const search = value => {
     setSearchText(value);
   }
 
+  const [ currentLanguage, setCurrentLanguage ] = useState("en");
+  const setLanguage = value => {
+    setCurrentLanguage(value);
+  }
+  const contextValue = {
+    languages: languages, 
+    changeLanguage: setLanguage, 
+    locale: currentLanguage
+  }
+
   return (
-    <LocalizationContext.Provider value={Localization.currentLanguage}>
+    <LocalizationContext.Provider value={contextValue}>
       <Layout style={{ minHeight: "100vh" }}>
         <Router>
           <Header searchCallback={search} />
