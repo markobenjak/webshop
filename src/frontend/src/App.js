@@ -11,8 +11,6 @@ import Content from './components/Content';
 
 import 'antd/dist/antd.css';
 import './App.css';
-import translations from './translations/translations.json';
-
 
 
 function App() {
@@ -22,8 +20,6 @@ function App() {
   const search = value => {
     setSearchText(value);
   }
-
-  console.log(translations);
 
   return (
     <LocalizationContext.Provider value={Localization.currentLanguage}>
