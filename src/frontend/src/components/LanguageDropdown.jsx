@@ -1,6 +1,6 @@
 import React from 'react'
 import { Select } from 'antd'
-import { LocalizationContext } from './LocalizationContext';
+import { LocalizationContext } from '../util/LocalizationContext';
 import Flag from 'react-world-flags';
 
 const { Option } = Select;
@@ -10,6 +10,7 @@ export default function LanguageSelectionDropdown(props) {
     const locale = React.useContext(LocalizationContext);
 
     return(
+        
         <Select defaultValue={locale}>
             <Option value="hr">
                 <div>

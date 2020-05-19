@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Layout, Row, Col, Modal, Input } from 'antd';
-import { LocalizationContext, Localization } from './components/LocalizationContext';
+import React, { useState } from 'react';
+import { Layout } from 'antd';
+import { LocalizationContext, Localization } from './util/LocalizationContext';
 
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
 } from "react-router-dom";
 
 import Header from './components/Header';

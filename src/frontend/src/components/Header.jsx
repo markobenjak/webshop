@@ -1,5 +1,5 @@
 import React from 'react';
-import { LocalizationContext } from './LocalizationContext';
+import { LocalizationContext } from '../util/LocalizationContext';
 import { Layout,  Input, Row, Col, Badge, Avatar, Button } from 'antd';
 
 import { ShoppingCartOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
@@ -10,8 +10,6 @@ import 'antd/dist/antd.css';
 import '../App.css';
 
 import translations from '../translations/translations.json';
-
-import logo from '../assets/logo-2.svg';
 
 
 export default function Header(props) {
@@ -47,11 +45,11 @@ export default function Header(props) {
                         enterButton
                         onSearch={value => search(value)} />
                 </Col>
-                <Col md={2}>
+                <Col md={{span:1, offset:2}}>
                     {/* Shit's broken yo */}
                     <LanguageDropdown />
                 </Col>
-                <Col md={{ span: 1, offset: 2 }}>
+                <Col md={{ span: 1, offset: 0 }}>
                     <a href="#" >
                         <Badge count={2}>
                             <Avatar

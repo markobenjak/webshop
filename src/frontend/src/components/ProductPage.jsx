@@ -11,6 +11,7 @@ function ProductPage(props) {
 
     const getProduct = () => {
         setIsLoadingProduct(true);
+        
         fetch(`/api/product/${productId}`)
         .then(res => res.json())
         .then(data => {

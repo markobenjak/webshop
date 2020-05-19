@@ -1,6 +1,5 @@
 import React from 'react';
 import {RecoilRoot} from 'recoil';
-import { LocalizeProvider } from "react-localize-redux"; // UNINSTALL!
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
