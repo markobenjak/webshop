@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Row, Col, Select } from 'antd';
 
-import { LocalizationContext } from './LocalizationContext';
+import { LocalizationContext } from '../util/LocalizationContext';
 
 import {
     Switch,
