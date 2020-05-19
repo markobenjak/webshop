@@ -45,3 +45,18 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+
+button.add-to-basket{
+  background-color: #00b50c;
+  border-color: #00b50c;
+}
+
+button.add-to-basket:hover{
+  background-color: #00cf0e;
+  border-color: #00cf0e;
+}
+
+button.add-to-basket:focus{
+  background-color: #00b50c;
+  border-color: #00b50c;
+}

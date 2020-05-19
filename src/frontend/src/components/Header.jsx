@@ -4,7 +4,7 @@ import { Layout,  Input, Row, Col, Badge, Avatar, Button } from 'antd';
 
 import {Link} from 'react-router-dom';
 
-import { ShoppingCartOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 
 import LanguageDropdown from './LanguageDropdown';
 
@@ -18,14 +18,6 @@ export default function Header(props) {
 
     const { locale } = React.useContext(LocalizationContext);
 
-    const SearchButton = () => {
-        return(
-            <Button  icon={<SearchOutlined />}>
-                Search
-            </Button>
-        )
-    }
-
     const search = value => {
         console.log("Header render");
         props.searchCallback(value);
@@ -35,9 +27,9 @@ export default function Header(props) {
         <Layout.Header className="header-margin">
             <Row className="content-width" >
                 <Col md={4} xs={6}>
-                    <a href="/">
+                    <Link to="/">
                         <div className="logo" />
-                    </a>
+                    </Link>
 
                 </Col>
                 <Col md={{ span: 10, offset: 3 }} xs={16}>

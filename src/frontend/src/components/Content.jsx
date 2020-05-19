@@ -76,14 +76,14 @@ export default function Content(props) {
         return(
             <Row>
                 <Col>
-                    <p>
+                    <p style={{display:"inline-block", marginRight:"5px"}}> 
                         {translations.prodsParPage[locale]}
-                        <Select defaultValue={productsPerPage} onSelect={value => setProductsPerPage(value)}>
+                    </p>
+                    <Select defaultValue={productsPerPage} onSelect={value => setProductsPerPage(value)}>
                             <Option value={10}>10</Option>
                             <Option value={20}>20</Option>
                             <Option value={30}>30</Option>
                         </Select>
-                    </p>
                 </Col>
             </Row>
         )

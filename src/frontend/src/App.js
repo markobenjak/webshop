@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Layout } from 'antd';
 import { LocalizationContext } from './util/LocalizationContext';
+import { BasketContext } from './util/BasketContext';
 
 import {
   BrowserRouter as Router,

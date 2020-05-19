@@ -10,5 +10,29 @@
     "search":{
         "hr":"Pretraga",
         "en":"Search"
+    },
+    "articleName":{
+        "hr":"Naziv",
+        "en":"Title"
+    },
+    "price":{
+        "hr":"Cijena:",
+        "en":"Price:"
+    },
+    "productAvailability":{
+        "hr":"Dostupnost: ",
+        "en":"Availability: "
+    },
+    "productAvailable":{
+        "hr":"Raspoloživo",
+        "en":"In stock"
+    },
+    "productUnavailable":{
+        "hr":"Nije raspoloživo",
+        "en":"Not in stock"
+    },
+    "addToBasket":{
+        "hr":"Dodaj u košaricu",
+        "en":"Add to basket"
     }
 }
