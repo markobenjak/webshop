@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Skeleton, Row, Col, Divider, InputNumber, Button } from 'antd';
-import {LocalizationContext } from '../util/LocalizationContext';
+import { LocalizationContext } from '../util/LocalizationContext';
 import { BasketContext } from '../util/BasketContext';
 
 import translation from '../translations/translations.json';
@@ -21,7 +21,6 @@ function ProductPage(props) {
 
     const getProduct = () => {
         setIsLoadingProduct(true);
-
         fetch(`/api/product/${productId}`)
         .then(res => res.json())
         .then(data => {
@@ -43,7 +42,6 @@ function ProductPage(props) {
                 </p>
                 }
             </React.Fragment>
-            
         )
     }
 
@@ -51,8 +49,7 @@ function ProductPage(props) {
         basketContext.updateCount(basketContext.productCount + productCount);
     }
 
-    //Cuz I'm lazy
-    const description = () =>{
+    const Description = () =>{
         return(
             <Row>
                 <Col md={{span:12}} xs={{span:24}}>
@@ -89,13 +86,6 @@ function ProductPage(props) {
                             </Col>
                         </Row>
                     </div>
-
-                    {/* <React.Fragment>
-                        <p>Name: {productDetails.name}</p>
-                        <p>Description: {productDetails.description}</p>
-                        <p>Price: {productDetails.price_hrk}</p>
-                        <p>Availability: {productDetails.isAvailable.toString()}</p>
-                    </React.Fragment> */}
                 </Col>
             </Row>
             
@@ -108,7 +98,9 @@ function ProductPage(props) {
 
     return (
         <div>
-            { isLoadingProduct === false && productDetails !== null ? description() : () => (<Skeleton />)}
+            { isLoadingProduct === false && productDetails !== null 
+                ? <Description /> 
+                : <Skeleton />}
         </div>
     );
 }

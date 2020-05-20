@@ -4,8 +4,8 @@
         "en":"Products per page: "
     },
     "price":{
-        "hr":"Cijena",
-        "en":"Price"
+        "hr":"Cijena: ",
+        "en":"Price:"
     },
     "search":{
         "hr":"Pretraga",
@@ -14,10 +14,6 @@
     "articleName":{
         "hr":"Naziv",
         "en":"Title"
-    },
-    "price":{
-        "hr":"Cijena:",
-        "en":"Price:"
     },
     "productAvailability":{
         "hr":"Dostupnost: ",
