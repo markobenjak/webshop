@@ -60,3 +60,21 @@ button.add-to-basket:focus{
   background-color: #00b50c;
   border-color: #00b50c;
 }
+
+.paragraph-inline{
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.paragraph-inline-larger{
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 1.2em;
+}
+
+div.product-page-container{
+  margin: 10px;
+  padding: 10px;
+  background-color: #ededed;
+  width: 100%;
+}

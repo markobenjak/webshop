@@ -1,6 +1,7 @@
 import React from 'react';
 import { LocalizationContext } from '../util/LocalizationContext';
-import { Layout,  Input, Row, Col, Badge, Avatar, Button } from 'antd';
+import { BasketContext } from '../util/BasketContext';
+import { Layout, Input, Row, Col, Badge, Avatar, Button } from 'antd';
 
 import {Link} from 'react-router-dom';
 
@@ -17,6 +18,8 @@ import translations from '../translations/translations.json';
 export default function Header(props) {
 
     const { locale } = React.useContext(LocalizationContext);
+    const { productCount } = React.useContext(BasketContext);
+    console.log(typeof(productCount));
 
     const search = value => {
         console.log("Header render");
@@ -45,7 +48,7 @@ export default function Header(props) {
                 </Col>
                 <Col md={{ span: 1, offset: 1 }}>
                     <Link to="/basket" >
-                        <Badge count={2}>
+                        <Badge count={productCount} showZero={true}>
                             <Avatar
                                 icon={<ShoppingCartOutlined style={{ fontSize: "1.4em", verticalAlign: "middle" }} />}
                                 size={32}

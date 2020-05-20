@@ -76,7 +76,7 @@ export default function Content(props) {
         return(
             <Row>
                 <Col>
-                    <p style={{display:"inline-block", marginRight:"5px"}}> 
+                    <p className="paragraph-inline"> 
                         {translations.prodsParPage[locale]}
                     </p>
                     <Select defaultValue={productsPerPage} onSelect={value => setProductsPerPage(value)}>
