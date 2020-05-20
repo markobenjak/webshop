@@ -16,7 +16,6 @@ export default function LanguageSelectionDropdown(props) {
                 style={{backgroundColor:"#001529"}} 
                 dropdownStyle={{backgroundColor:"lightgray"}}
         >
-
             <Option value="hr">
                 <span className="flag-icon flag-icon-hr" />
             </Option>

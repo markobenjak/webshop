@@ -23,12 +23,10 @@ function App() {
   }
 
   const [ currentLanguage, setCurrentLanguage ] = useState("en");
-  const setLanguage = value => {
-    setCurrentLanguage(value);
-  }
+  
   const contextValue = {
     languages: languages, 
-    changeLanguage: setLanguage, 
+    changeLanguage: setCurrentLanguage, 
     locale: currentLanguage
   }
 
