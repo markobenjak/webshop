@@ -69,13 +69,19 @@ public class OrderDaoImpl implements OrderDao {
 	}
 	
 	@Override
-	public List<Order> readOrder(Order order){
+	public List<EntireOrder> readOrder(Integer customerId){
 		
-		final String sql = "select * from shop.webshop_order where customer_id = :customer_id";
+		final String sql = "select wo.id, p.name, p.description, p.price_hrk, oi.quantity "
+				+ "from shop.webshop_order wo join shop.order_item oi on wo.id = oi.order_id "
+				+ "join shop.product p on p.id = oi.product_id where wo.customer_id = :customer_id";
+		
 		SqlParameterSource param = new MapSqlParameterSource()
-				.addValue("customer_id", order.getCustomer_id());
+				.addValue("customer_id", customerId);
+		List<EntireOrder> entireOrderList = template.query(sql, param, new EntireOrderRowMapper());
 		
-		return template.query(sql, param, new OrderRowMapper());
+		
+		if(entireOrderList.size() > 0) return entireOrderList;
+		return null;
 	}
 	
 	@Override

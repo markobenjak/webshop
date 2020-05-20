@@ -24,9 +24,9 @@ public class OrderController {
 		orderService.createOrder(order);
 	}
 	
-	@GetMapping(value = "/")
-	public List<Order> readOrder(@RequestBody Order order) {
-		return orderService.readOrder(order);
+	@GetMapping(value = "/{customerId}")
+	public List<EntireOrder> readOrder(@PathVariable("customerId") int customerId) {
+		return orderService.readOrder(customerId);
 
 	}
 	
