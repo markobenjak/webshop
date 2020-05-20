@@ -35,6 +35,18 @@
         "hr":"Dodaj u košaricu",
         "en":"Add to basket"
     },
+    "quantity":{
+        "hr":"Količina",
+        "en":"Quantity"
+    },
+    "buy":{
+        "hr":"Kupi",
+        "en":"Buy"
+    },
+    "deleteBasket":{
+        "hr":"Delete Cart",
+        "en":"Delete Cart"
+    },
     "customerName":{
         "hr":"Ime:",
         "en":"Name:"
