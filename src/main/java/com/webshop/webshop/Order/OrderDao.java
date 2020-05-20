@@ -7,9 +7,10 @@ public interface OrderDao {
 	List<Order> findAll();
 
 	void createOrder(Order order);
-	List<Order> readOrder(Order order);
-
+	
 	void deleteOrder(int orderId);
 
 	void finalizeOrder(Order order);
+
+	List<EntireOrder> readOrder(Integer cusotmerId);
 }
