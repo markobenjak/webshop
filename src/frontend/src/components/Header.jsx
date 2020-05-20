@@ -57,9 +57,9 @@ export default function Header(props) {
                     </Link>
                 </Col>
                 <Col span={1} offset={1} >
-                    <a href="#" >
+                    <Link to="/customer" >
                         <Avatar icon={<UserOutlined />} />
-                    </a>
+                    </Link>
 
                 </Col>
 

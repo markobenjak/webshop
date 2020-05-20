@@ -34,5 +34,17 @@
     "addToBasket":{
         "hr":"Dodaj u košaricu",
         "en":"Add to basket"
+    },
+    "customerName":{
+        "hr":"Ime:",
+        "en":"Name:"
+    },
+    "customerSurname":{
+        "hr":"Prezime:",
+        "en":"Surname:"
+    },
+    "editCustomerData":{
+        "hr":"Uredi profil",
+        "en":"Edit profile"
     }
 }

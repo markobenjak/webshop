@@ -10,6 +10,7 @@ import {
 
 import Products from './Products';
 import ProductPage from './ProductPage';
+import Customer from './Customer';
 
 import 'antd/dist/antd.css';
 import '../App.css';
@@ -102,6 +103,7 @@ export default function Content(props) {
                     <Route path="/basket" >
                         <Basket />
                     </Route>
+                    <Route path="/customer" component={Customer} />
                 </Switch>
             </div>
         </Layout.Content>
