@@ -10,9 +10,9 @@ import javax.persistence.Id;
 public class Order {
 	
 	private @Id @GeneratedValue Integer id;
-	private Integer customer_id;
-	private Integer total_price_hrk;
-	private Integer total_price_eur;
+	private Integer customerId;
+	private Integer totalPriceHrk;
+	private Integer totalPriceEur;
 	private String status;
 	
 	
@@ -26,28 +26,28 @@ public class Order {
 		this.id = id;
 	}
 
-	public Integer getCustomer_id() {
-		return customer_id;
+	public Integer getCustomerId() {
+		return customerId;
 	}
 
-	public void setCustomer_id(Integer customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
 
-	public Integer getTotal_price_hrk() {
-		return total_price_hrk;
+	public Integer getTotalPriceHrk() {
+		return totalPriceHrk;
 	}
 
-	public void setTotal_price_hrk(Integer total_price_hrk) {
-		this.total_price_hrk = total_price_hrk;
+	public void setTotalPriceHrk(Integer totalPriceHrk) {
+		this.totalPriceHrk = totalPriceHrk;
 	}
 
-	public Integer getTotal_price_eur() {
-		return total_price_eur;
+	public Integer getTotalPriceEur() {
+		return totalPriceEur;
 	}
 
-	public void setTotal_price_eur(Integer total_price_eur) {
-		this.total_price_eur = total_price_eur;
+	public void setTotalPriceEur(Integer totalPriceEur) {
+		this.totalPriceEur = totalPriceEur;
 	}
 
 	public String getStatus() {

@@ -1,20 +1,9 @@
 package com.webshop.webshop.Order;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.webshop.webshop.OrderItem.OrderItem;
+import com.webshop.webshop.OrderItem.OrderItemRowMapper;
+import com.webshop.webshop.Product.Product;
+import com.webshop.webshop.Product.ProductRowMapper;
 import org.json.JSONObject;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCallback;
@@ -25,10 +14,16 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 
-import com.webshop.webshop.OrderItem.OrderItem;
-import com.webshop.webshop.OrderItem.OrderItemRowMapper;
-import com.webshop.webshop.Product.Product;
-import com.webshop.webshop.Product.ProductRowMapper;
+import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -37,7 +32,7 @@ public class OrderDaoImpl implements OrderDao {
 	public enum status{
 		DRAFT,
 		SUBMITTED
-	};
+	}
 
 	
 	public OrderDaoImpl(NamedParameterJdbcTemplate template) {  
@@ -48,22 +43,22 @@ public class OrderDaoImpl implements OrderDao {
 	
 	@Override
 	public List<Order> findAll() {
-		return template.query("select * from shop.webshop_order", new OrderRowMapper());		
+		return template.query("SELECT * FROM shop.webshop_order", new OrderRowMapper());
 	}
 	
 	@Override
 	public void createOrder(Order order) {
 
-	 final String sql = "insert into shop.webshop_order(customer_id, status, total_price_hrk, total_price_eur) "
-	 		+ "values(:customer_id,:status,:total_price_hrk,:total_price_eur)";
+	 final String sql = "INSERT INTO shop.webshop_order(customer_id, status, total_price_hrk, total_price_eur) "
+	 		+ "VALUES(:customer_id,:status,:total_price_hrk,:total_price_eur)";
 	 
 	 KeyHolder holder = new GeneratedKeyHolder();
 
 	 SqlParameterSource param = new MapSqlParameterSource()
-		.addValue("customer_id", order.getCustomer_id())
+		.addValue("customer_id", order.getCustomerId())
 		.addValue("status", status.DRAFT.toString())
-		.addValue("total_price_hrk", order.getTotal_price_hrk())
-		.addValue("total_price_eur", order.getTotal_price_eur());
+		.addValue("total_price_hrk", order.getTotalPriceHrk())
+		.addValue("total_price_eur", order.getTotalPriceEur());
 	 template.update(sql,param, holder);
 
 	}
@@ -71,9 +66,11 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public List<EntireOrder> readOrder(Integer customerId){
 		
-		final String sql = "select wo.id, p.name, p.description, p.price_hrk, oi.quantity "
-				+ "from shop.webshop_order wo join shop.order_item oi on wo.id = oi.order_id "
-				+ "join shop.product p on p.id = oi.product_id where wo.customer_id = :customer_id";
+		final String sql = "SELECT wo.id, p.name, p.description, p.price_hrk, oi.quantity "
+				+ "FROM shop.webshop_order wo "
+				+ "JOIN shop.order_item oi ON wo.id = oi.order_id "
+				+ "JOIN shop.product p ON p.id = oi.product_id "
+				+ "WHERE wo.customer_id = :customer_id";
 		
 		SqlParameterSource param = new MapSqlParameterSource()
 				.addValue("customer_id", customerId);
@@ -86,7 +83,7 @@ public class OrderDaoImpl implements OrderDao {
 	
 	@Override
 	public void deleteOrder(int orderId) {
-		 final String sql = "delete from shop.webshop_order where id=:id";
+		 final String sql = "DELETE FROM shop.webshop_order WHERE id=:id";
 		 
 		 Map<String,Integer> map=new HashMap<String,Integer>();
 		 map.put("id", orderId);
@@ -104,23 +101,23 @@ public class OrderDaoImpl implements OrderDao {
 		Double totalPriceHRK = 0.0;
 		Double totalPriceEUR = 0.0;
 		Integer quantity;
-		Integer product_id;
-		final String itemsSql = "select * from shop.order_item where order_id = "
-				+ "(select id from shop.webshop_order where customer_id = :customer_id "
-				+ "and status = '" + status.DRAFT.toString() + "' limit 1)";
+		Integer productId;
+		final String itemsSql = "SELECT * FROM shop.order_item "
+				+ "WHERE order_id = (SELECT id FROM shop.webshop_order WHERE customer_id = :customer_id "
+				+ "AND status = '" + status.DRAFT.toString() + "' LIMIT 1)";
 		SqlParameterSource paramItems = new MapSqlParameterSource()
-				.addValue("customer_id", order.getCustomer_id());
+				.addValue("customer_id", order.getCustomerId());
 		
 		OrderItemRowMapper orderItem = new OrderItemRowMapper();
 		List<OrderItem> itemList = template.query(itemsSql, paramItems ,orderItem);
 		
 		for(int i=0; i<itemList.size();i++) {
 			quantity = itemList.get(i).getQuantity();
-			product_id = itemList.get(i).getProduct_id();
+			productId = itemList.get(i).getProduct_id();
 			
-			final String productSql = "select * from shop.product where id = :product_id";
+			final String productSql = "SELECT * FROM shop.product WHERE id = :product_id";
 			SqlParameterSource paramProduct = new MapSqlParameterSource()
-					.addValue("product_id", product_id);			
+					.addValue("product_id", productId);
 			ProductRowMapper  product = new ProductRowMapper();
 			List<Product> productList = template.query(productSql, paramProduct ,product);
 			
@@ -139,13 +136,13 @@ public class OrderDaoImpl implements OrderDao {
 			e.printStackTrace();
 		}
 		
-		final String sql = "update shop.webshop_order set status='"+ status.SUBMITTED.toString() +"', total_price_hrk = :totalPriceHRK, "
-				+ "total_price_eur = :totalPriceEUR "
-				+ "where customer_id=:customer_id";
+		final String sql = "UPDATE shop.webshop_order "
+				+ "SET status='"+ status.SUBMITTED.toString() +"', total_price_hrk = :totalPriceHRK, total_price_eur = :totalPriceEUR "
+				+ "WHERE customer_id=:customer_id";
 		KeyHolder holder = new GeneratedKeyHolder();
 
         SqlParameterSource param = new MapSqlParameterSource()
-        		.addValue("customer_id", order.getCustomer_id())
+        		.addValue("customer_id", order.getCustomerId())
         		.addValue("totalPriceHRK", totalPriceHRK)
         		.addValue("totalPriceEUR", totalPriceEUR);
 
@@ -172,7 +169,7 @@ public class OrderDaoImpl implements OrderDao {
 	      is.close();
 	    }
 		return Double.parseDouble(srednjiTecaj);
-	};
+	}
 	
 	private static String readAll(Reader rd) throws IOException {
 	    StringBuilder sb = new StringBuilder();
