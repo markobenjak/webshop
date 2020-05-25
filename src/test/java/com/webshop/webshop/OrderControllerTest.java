@@ -1,12 +1,7 @@
 package com.webshop.webshop;
 
-import static org.mockito.Mockito.mock;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.webshop.webshop.Order.OrderController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,8 +13,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.webshop.webshop.Order.OrderController;
+import static org.mockito.Mockito.mock;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -44,7 +41,7 @@ public class OrderControllerTest {
     public void orderList() throws Exception{
         controllerTest = mock(OrderController.class);
 
-         this.mockMvc.perform(get("/webshop/orderList")
+         this.mockMvc.perform(get("/api/order/list")
                  .accept(MediaType.parseMediaType("application/json")))
                  .andExpect(status().isOk())
                  .andExpect(content().contentType(MediaType.APPLICATION_JSON));
@@ -53,7 +50,7 @@ public class OrderControllerTest {
     @Test
     public void createOrder(){
     	  try {
-			mockMvc.perform(post("/webshop/createOrder")
+			mockMvc.perform(post("/api/order/")
 			           .contentType(MediaType.APPLICATION_JSON)
 			           .content("{ \"customer_id\": 1,"
 			           		+ " \"total_price_hrk\": 100.00,"
@@ -67,10 +64,9 @@ public class OrderControllerTest {
     }
     
     @Test
-    public void radOrder() throws Exception {
-    	  mockMvc.perform(post("/webshop/readOrder")
+    public void readOrder() throws Exception {
+    	  mockMvc.perform(get("/api/order/1")
     	           .contentType(MediaType.APPLICATION_JSON)
-    	           .content("{ \"customer_id\": 1 }") 
     	           .accept(MediaType.APPLICATION_JSON))
     	           .andExpect(status().isOk())
     	           .andExpect(content().contentType(MediaType.APPLICATION_JSON));
@@ -79,9 +75,8 @@ public class OrderControllerTest {
     
     @Test
     public void deleteOrder() throws Exception {
-    	  mockMvc.perform(delete("/webshop/deleteOrderById")
+    	  mockMvc.perform(delete("/api/order/delete/1")
     	           .contentType(MediaType.APPLICATION_JSON)
-    	           .content("{ \"id\": 15 }") 
     	           .accept(MediaType.APPLICATION_JSON))
     	           .andExpect(status().isOk());
 
@@ -89,19 +84,12 @@ public class OrderControllerTest {
     
     @Test
     public void finalizeOrder() throws Exception {
-    	  mockMvc.perform(post("/webshop/finalizeOrder")
+    	  mockMvc.perform(post("/api/order/finalize")
     	           .contentType(MediaType.APPLICATION_JSON)
     	           .content("{ \"customer_id\": 1 }") 
     	           .accept(MediaType.APPLICATION_JSON))
     	           .andExpect(status().isOk());
 
-    }
-
-    
-    
-
-    @Test
-    public void contextLoads() {
     }
 
 }
