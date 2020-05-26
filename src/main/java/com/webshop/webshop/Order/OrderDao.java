@@ -13,4 +13,8 @@ public interface OrderDao {
 	void finalizeOrder(Order order);
 
 	List<EntireOrder> readOrder(Integer cusotmerId);
+
+	Integer countSubmittedOrders();
+
+	Integer countDraftOrders();
 }

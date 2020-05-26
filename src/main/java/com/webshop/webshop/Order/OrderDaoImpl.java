@@ -6,6 +6,7 @@ import com.webshop.webshop.Product.Product;
 import com.webshop.webshop.Product.ProductRowMapper;
 import org.json.JSONObject;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -28,18 +29,21 @@ import java.util.Map;
 
 @Service
 public class OrderDaoImpl implements OrderDao {
-	
+
+	NamedParameterJdbcTemplate template;
+	JdbcTemplate jdbcTemplate;
+
+	public OrderDaoImpl(NamedParameterJdbcTemplate template, JdbcTemplate jdbcTemplate) {
+		this.template = template;
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 	public enum status{
 		DRAFT,
 		SUBMITTED
 	}
 
-	
-	public OrderDaoImpl(NamedParameterJdbcTemplate template) {  
-        this.template = template;  
-	}  
 
-	NamedParameterJdbcTemplate template;  
 	
 	@Override
 	public List<Order> findAll() {
@@ -179,5 +183,27 @@ public class OrderDaoImpl implements OrderDao {
 	    }
 	    return sb.toString();
 	  }
+
+	  public Integer countSubmittedOrders(){
+		int submittedOrders = 0;
+		final String sqlSubmittedOrders = "SELECT count(id) "
+				  + "FROM shop.webshop_order "
+				  + "WHERE status = 'SUBMITTED'; ";
+
+		return jdbcTemplate.queryForObject(sqlSubmittedOrders, Integer.class);
+
+	  }
+
+	public Integer countDraftOrders(){
+		int draftOrders = 0;
+		final String sqlDraftOrders = "SELECT count(id) "
+				+ "FROM shop.webshop_order "
+				+ "WHERE status = 'DRAFT'; ";
+
+		return jdbcTemplate.queryForObject(sqlDraftOrders, Integer.class);
+
+	}
+
+
 	
 }
