@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout } from 'antd';
 import { LocalizationContext } from './util/LocalizationContext';
 import { BasketContext } from './util/BasketContext';
+
+import { CookieService } from './services/CookieService';
 
 import {
   BrowserRouter as Router,
@@ -30,12 +32,24 @@ function App() {
     locale: currentLanguage
   }
 
+  // let basketCountCookie = CookieService.getCookie();
+  // useEffect(() => {
+  //   if(basketCountCookie === undefined){
+  //     basketCountCookie = "0";
+  //     CookieService.setCookie("basket_count",0,500);
+  //   }
+  //   basketCountCookie = parseInt(basketCountCookie);
+  // }, []);
+
+  
 
   const [basketProductCount, setBasketProductCount] = useState(0); //TODO: save basket to cookie/local storage, load from there
   const basketContextVal = {
     productCount: basketProductCount,
     updateCount: setBasketProductCount
   }
+
+  
 
   return (
     <LocalizationContext.Provider value={contextValue}>
