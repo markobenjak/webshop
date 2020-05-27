@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,7 @@ public class CustomerController {
 		return customerService.FindCustomerById(customerId);
 	}
 
+	@Secured("ROLE_USER")
 	@GetMapping(value = "/all")
 	public List<Customer> GetAllCustomers() {
 		return customerService.FindAll();

@@ -1,11 +1,12 @@
 package com.webshop.webshop.Customer;
 
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-@Data
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
 @Entity
 public class Customer {
 	
@@ -13,11 +14,26 @@ public class Customer {
 	private String first_name;
 	private String last_name;
 	private String email;
-	
-//	private enum status{
-//		DRAFTED,
-//		SUBMITTED
-//	};
+
+
+
+	private int authority_id;
+
+
+	private String password;
+
+
+
+
+	//	@ManyToOne
+//	@JoinTable(
+//			name="Authority",
+//			schema = "shop",
+//			joinColumns = {@JoinColumn(name="authority_id", referencedColumnName = "id")},
+//			inverseJoinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")}
+//	)
+	private transient Authority authority;
+
 	
 	public Customer() {}
 
@@ -53,6 +69,27 @@ public class Customer {
 		this.email = email;
 	}
 
-	
+	public String getPassword() {
+		return password;
+	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getAuthority_id() {
+		return authority_id;
+	}
+
+	public void setAuthority_id(int authority_id) {
+		this.authority_id = authority_id;
+	}
+
+	public Authority getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Authority authority) {
+		this.authority = authority;
+	}
 }

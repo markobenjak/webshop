@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.webshop.webshop.Product.Product;
 import com.webshop.webshop.Product.ProductRowMapper;
@@ -30,7 +31,8 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public Customer FindCustomerById(int customerId){
-		final String customerSql = "select * from shop.customer where id = :id limit 1";
+		final String customerSql = "select * from shop.customer c " +
+				"inner join shop.authority a on a.id = c.authority_id where c.id = :id limit 1";
 		SqlParameterSource customerParam = new MapSqlParameterSource()
 				.addValue("id", customerId);
 
@@ -38,6 +40,20 @@ public class CustomerDaoImpl implements CustomerDao {
 		List<Customer> itemList = template.query(customerSql, customerParam ,customerMapper);
 
 		if(itemList.size() > 0) return itemList.get(0);
+		return null;
+	}
+
+	@Override
+	public Optional<Customer> FindCustomerByEmail(String email){
+		final String customerSql = "select * from shop.customer c " +
+				"inner join shop.authority a on a.id = c.authority_id where c.email = :email limit 1";
+		SqlParameterSource customerParam = new MapSqlParameterSource()
+				.addValue("email", email);
+
+		CustomerRowMapper customerMapper = new CustomerRowMapper();
+		List<Customer> itemList = template.query(customerSql, customerParam ,customerMapper);
+
+		if(itemList.size() > 0) return Optional.of(itemList.get(0));
 		return null;
 	}
 	

@@ -12,3 +12,9 @@ VALUES('ROLE_USER');
 
 INSERT INTO shop.authority(authority)
 VALUES('ROLE_ADMIN');
+
+update shop.customer
+set authority_id = (select id from shop.authority where authority = 'ROLE_USER');
+
+update shop.customer
+set password = '$2y$12$hAtgEqN94PMOF.CibWMitedP3uGbtnG7hFE9kytIjuVS4YwvC.7kG'; --pass1234
