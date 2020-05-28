@@ -78,3 +78,20 @@ div.product-page-container{
   background-color: #ededed;
   width: 100%;
 }
+#form-login .login-form {
+  max-width: 300px;
+}
+#form-login .login-form-forgot {
+  float: right;
+}
+#form-login .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+#form-login .login-form-button {
+  width: 100%;
+}
+
+.login-layout{
+  width: 100%;
+  max-width: 900px;
+}

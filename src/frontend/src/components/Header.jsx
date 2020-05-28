@@ -1,9 +1,11 @@
 import React from 'react';
 import { LocalizationContext } from '../util/LocalizationContext';
 import { BasketContext } from '../util/BasketContext';
-import { Layout, Input, Row, Col, Badge, Avatar, Button } from 'antd';
+import { UserContext } from '../util/UserContext';
+import { Layout, Input, Row, Col, Badge, Avatar, Button, Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 
@@ -17,14 +19,36 @@ import translations from '../translations/translations.json';
 
 export default function Header(props) {
 
+    const user = React.useContext(UserContext);
     const { locale } = React.useContext(LocalizationContext);
     const { productCount } = React.useContext(BasketContext);
-    console.log(typeof(productCount));
+
+    const history = useHistory();
 
     const search = value => {
         console.log("Header render");
         props.searchCallback(value);
     }
+
+    console.log(user);
+
+    const route = {
+        to: user.value !== null ? "/customer" : "/login"
+    }
+
+    const logout = () => {
+        user.update(null);
+        window.localStorage.clear("user");
+        history.push("/");
+    }
+
+    const menu = (
+        <Menu >
+          <Menu.Item key="1" onClick={logout}>
+            {translations.logoff[locale]}
+          </Menu.Item>
+        </Menu>
+      );
 
     return (
         <Layout.Header className="header-margin">
@@ -43,7 +67,6 @@ export default function Header(props) {
                         onSearch={value => search(value)} />
                 </Col>
                 <Col md={{span:1, offset:2}}>
-                    {/* Shit's broken yo */}
                     <LanguageDropdown />
                 </Col>
                 <Col md={{ span: 1, offset: 1 }}>
@@ -56,12 +79,23 @@ export default function Header(props) {
                         </Badge>
                     </Link>
                 </Col>
-                <Col span={1} offset={1} >
-                    <Link to="/customer" >
+                <Col span={1} >
+                    <Link {...route} >
                         <Avatar icon={<UserOutlined />} />
                     </Link>
-
+                    
                 </Col>
+                {
+                    user.value && 
+                    <Col span={1}>
+                        <Dropdown overlay={menu}>
+                            <Button>
+                                <DownOutlined />
+                            </Button>
+                        </Dropdown>
+                    </Col>
+                }
+                
 
             </Row>
         </Layout.Header>

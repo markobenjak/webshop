@@ -7,10 +7,13 @@ import { CookieService } from './services/CookieService';
 
 import {
   BrowserRouter as Router,
+  Route,
+  withRouter
 } from "react-router-dom";
 
 import Header from './components/Header';
 import Content from './components/Content';
+import Login from './components/Login';
 
 import 'antd/dist/antd.css';
 import './App.css';
@@ -55,11 +58,9 @@ function App() {
     <LocalizationContext.Provider value={contextValue}>
       <BasketContext.Provider value={basketContextVal}>
         <Layout style={{ minHeight: "100vh" }}>
-          <Router>
-            <Header searchCallback={search} />
-            <Content search={searchText} />
-            <Layout.Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Layout.Footer>
-          </Router>
+          <Header searchCallback={search} />
+          <Content search={searchText} />
+          <Layout.Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Layout.Footer>
         </Layout>
       </BasketContext.Provider>
     </LocalizationContext.Provider>
@@ -67,4 +68,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

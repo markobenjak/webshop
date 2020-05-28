@@ -73,6 +73,9 @@ public class AuthController {
         @NotNull
         private String password;
 
+        @NotNull
+        private Boolean remember;
+
         public String getUsername() {
             return username;
         }
@@ -87,6 +90,14 @@ public class AuthController {
 
         public void setPassword(String password) {
             this.password = password;
+        }
+
+        public Boolean getRemember() {
+            return remember;
+        }
+
+        public void setRemember(Boolean remember) {
+            this.remember = remember;
         }
     }
 }

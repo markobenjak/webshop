@@ -12,12 +12,11 @@ export default function Products({products}) {
             {
                 products && products.map((item, index) => {
                     return (
-                        <Col xs={{ span: 24 }} md={{ span: 6 }} className="col-bottom-spacing">
+                        <Col xs={{ span: 24 }} md={{ span: 6 }} className="col-bottom-spacing" key={item["id"]}>
                             <ProductCard
                                 title={item["name"]}
                                 price={item["price_hrk"]}
                                 id={item["id"]}
-                                key={index}
                             />
                         </Col>
                     )

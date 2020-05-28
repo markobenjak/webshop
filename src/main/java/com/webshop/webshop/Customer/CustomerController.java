@@ -19,7 +19,7 @@ public class CustomerController {
 		return customerService.FindCustomerById(customerId);
 	}
 
-	@Secured("ROLE_USER")
+	@Secured("ROLE_ADMIN")
 	@GetMapping(value = "/all")
 	public List<Customer> GetAllCustomers() {
 		return customerService.FindAll();

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../util/UserContext';
 
 import translation from '../translations/translations.json';
 
@@ -9,15 +10,20 @@ import {Button, Col, Row, Skeleton} from "antd";
 export default function Customer(props){
     const customerId = 2;
 
+    const user = useContext(UserContext);
+
+    console.log(user);
+
     const { locale } = React.useContext(LocalizationContext);
 
     const [customerDetails, setCustomerDetails] = useState(null);
     const [isLoadingCustomer, setIsLoadingCustomer] = useState(false);
+    
 
     const getCustomer = () => {
         setIsLoadingCustomer(true);
 
-        fetch(`/api/customer/${customerId}`)
+        fetch(`/api/customer/id/${customerId}`)
             .then(res => res.json())
             .then(data => {
                 console.log('Kastomer: ');

@@ -5,7 +5,8 @@ import { LocalizationContext } from '../util/LocalizationContext';
 
 import {
     Switch,
-    Route
+    Route,
+    withRouter
 } from 'react-router-dom';
 
 import Products from './Products';
@@ -21,7 +22,7 @@ import Basket from './Basket';
 const { Option } = Select;
 
 
-export default function Content(props) {
+function Content(props) {
 
 
     const [searchQuery, setSearchQuery] = useState("");
@@ -109,3 +110,5 @@ export default function Content(props) {
         </Layout.Content>
     )
 }
+
+export default withRouter(Content);

@@ -54,5 +54,25 @@
     "editCustomerData":{
         "hr":"Uredi profil",
         "en":"Edit profile"
+    },
+    "logoff":{
+        "hr":"Odjavi se",
+        "en":"Log out"
+    },
+    "login":{
+        "hr":"Prijava",
+        "en":"Login"
+    },
+    "forgotPassword":{
+        "hr":"Zaboravljena lozinka",
+        "en":"Forgotten password"
+    },
+    "rememberMe":{
+        "hr":"Zapamti me",
+        "en":"Rememeber me"
+    },
+    "username":{
+        "hr":"Korisničko ime",
+        "en":"Username"
     }
 }
