@@ -16,4 +16,6 @@ public interface CustomerDao {
 	void UpdateCustomer(Customer customer);
 
 	void DeleteCustomer(int customerId);
+
+	Integer CountCurrentUsers();
 }

@@ -26,4 +26,19 @@ public class QuartzConfiguration {
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
                 .build();
     }
+
+    @Bean
+    public JobDetail scheduleCustomersJob() {
+        return JobBuilder.newJob(LogCustomers.class).storeDurably().withIdentity("customersCount")
+                .withDescription("Number of current customers").build();
+    }
+
+    @Bean
+    public Trigger scheduleCustomersTrigger() {
+        return newTrigger()
+                .withIdentity("customersCountTrigger")
+                .forJob(scheduleCustomersJob())
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
+                .build();
+    }
 }

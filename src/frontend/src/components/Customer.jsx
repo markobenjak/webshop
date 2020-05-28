@@ -7,7 +7,7 @@ import {LocalizationContext} from "../util/LocalizationContext";
 import {Button, Col, Row, Skeleton} from "antd";
 
 export default function Customer(props){
-    const customerId = 1;
+    const customerId = 2;
 
     const { locale } = React.useContext(LocalizationContext);
 

@@ -10,6 +10,7 @@ import java.util.Optional;
 import com.webshop.webshop.Product.Product;
 import com.webshop.webshop.Product.ProductRowMapper;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -23,11 +24,13 @@ import org.springframework.stereotype.Service;
 public class CustomerDaoImpl implements CustomerDao {
 
 	
-	public CustomerDaoImpl(NamedParameterJdbcTemplate template) {  
-        this.template = template;  
+	public CustomerDaoImpl(NamedParameterJdbcTemplate template, JdbcTemplate jdbcTemplate) {
+        this.template = template;
+		this.jdbcTemplate = jdbcTemplate;
 	}  
 
 	NamedParameterJdbcTemplate template;
+	JdbcTemplate jdbcTemplate;
 
 	@Override
 	public Customer FindCustomerById(int customerId){
@@ -110,4 +113,10 @@ public class CustomerDaoImpl implements CustomerDao {
 		});
 	}
 
+	public Integer CountCurrentUsers(){
+		final String sqlCurrentCustomers = "SELECT count(id) "
+				+ "FROM shop.customer";
+
+		return jdbcTemplate.queryForObject(sqlCurrentCustomers, Integer.class);
+	}
 }

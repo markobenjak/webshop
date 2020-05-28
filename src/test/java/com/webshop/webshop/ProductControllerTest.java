@@ -23,7 +23,7 @@ import com.webshop.webshop.Product.ProductController;
 public class ProductControllerTest {
 	
 
-    final String BASE_URL = "http://localhost:8080/";
+    final String BASE_URL = "http://localhost:8090/";
 
     @Autowired
     private ProductController controllerTest;
@@ -39,7 +39,7 @@ public class ProductControllerTest {
     public void productList() throws Exception{
         controllerTest = mock(ProductController.class);
 
-         this.mockMvc.perform(get("/webshop/productList")
+         this.mockMvc.perform(get("/api/product/list")
                  .accept(MediaType.parseMediaType("application/json")))
                  .andExpect(status().isOk())
                  .andExpect(content().contentType(MediaType.APPLICATION_JSON));
@@ -47,7 +47,7 @@ public class ProductControllerTest {
     
     @Test
     public void validateProduct() throws Exception {
-    	  mockMvc.perform(post("/webshop/validateProduct")
+    	  mockMvc.perform(post("/api/product/validate")
     	           .contentType(MediaType.APPLICATION_JSON)
     	           .content("{ \"id\": 1 }") 
     	           .accept(MediaType.APPLICATION_JSON))
