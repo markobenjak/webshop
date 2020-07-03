@@ -53,17 +53,17 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public void createOrder(Order order) {
 
-	 final String sql = "INSERT INTO shop.webshop_order(customer_id, status, total_price_hrk, total_price_eur) "
-	 		+ "VALUES(:customer_id,:status,:total_price_hrk,:total_price_eur)";
-	 
-	 KeyHolder holder = new GeneratedKeyHolder();
+		 final String sql = "INSERT INTO shop.webshop_order(customer_id, status, total_price_hrk, total_price_eur) "
+				+ "VALUES(:customer_id,:status,:total_price_hrk,:total_price_eur)";
 
-	 SqlParameterSource param = new MapSqlParameterSource()
-		.addValue("customer_id", order.getCustomerId())
-		.addValue("status", status.DRAFT.toString())
-		.addValue("total_price_hrk", order.getTotalPriceHrk())
-		.addValue("total_price_eur", order.getTotalPriceEur());
-	 template.update(sql,param, holder);
+		 KeyHolder holder = new GeneratedKeyHolder();
+
+		 SqlParameterSource param = new MapSqlParameterSource()
+			.addValue("customer_id", order.getCustomerId())
+			.addValue("status", status.DRAFT.toString())
+			.addValue("total_price_hrk", order.getTotalPriceHrk())
+			.addValue("total_price_eur", order.getTotalPriceEur());
+		 template.update(sql,param, holder);
 
 	}
 	
@@ -145,12 +145,12 @@ public class OrderDaoImpl implements OrderDao {
 				+ "WHERE customer_id=:customer_id";
 		KeyHolder holder = new GeneratedKeyHolder();
 
-        SqlParameterSource param = new MapSqlParameterSource()
-        		.addValue("customer_id", order.getCustomerId())
-        		.addValue("totalPriceHRK", totalPriceHRK)
-        		.addValue("totalPriceEUR", totalPriceEUR);
+		SqlParameterSource param = new MapSqlParameterSource()
+				.addValue("customer_id", order.getCustomerId())
+				.addValue("totalPriceHRK", totalPriceHRK)
+				.addValue("totalPriceEUR", totalPriceEUR);
 
-        template.update(sql,param, holder);
+		template.update(sql,param, holder);
 
 	}
 	
@@ -160,14 +160,14 @@ public class OrderDaoImpl implements OrderDao {
 		String srednjiTecaj;
 	    try {
 	    	
-	      BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-	      String jsonText = readAll(rd);
-	      jsonText = jsonText.replace("[", "");
-	      jsonText = jsonText.replace("]", "");
-	      JSONObject json = new JSONObject(jsonText);
-	      
-	      srednjiTecaj = json.getString("srednji_tecaj");
-	      srednjiTecaj = srednjiTecaj.replace(",", ".");
+		BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+		String jsonText = readAll(rd);
+		jsonText = jsonText.replace("[", "");
+		jsonText = jsonText.replace("]", "");
+		JSONObject json = new JSONObject(jsonText);
+
+		srednjiTecaj = json.getString("srednji_tecaj");
+		srednjiTecaj = srednjiTecaj.replace(",", ".");
 	      
 	    } finally {
 	      is.close();
@@ -176,12 +176,12 @@ public class OrderDaoImpl implements OrderDao {
 	}
 	
 	private static String readAll(Reader rd) throws IOException {
-	    StringBuilder sb = new StringBuilder();
-	    int cp;
-	    while ((cp = rd.read()) != -1) {
-	      sb.append((char) cp);
-	    }
-	    return sb.toString();
+		StringBuilder sb = new StringBuilder();
+		int cp;
+		while ((cp = rd.read()) != -1) {
+			sb.append((char) cp);
+		}
+		return sb.toString();
 	  }
 
 	  public Integer countSubmittedOrders(){
